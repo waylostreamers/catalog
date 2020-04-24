@@ -9,8 +9,8 @@ class User(models.Model):
 
 class Artist(models.Model):
     name = models.TextField()
-    artwork_id = models.UUIDField()
-    owner_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    artwork_id = models.UUIDField(null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Role(models.Model):
@@ -27,7 +27,7 @@ class Track(models.Model):
     title = models.TextField()
     artists = models.ManyToManyField(Contributor)
     audio_file_id = models.UUIDField()
-    owner_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
     stream_cost = models.DecimalField(decimal_places=4, max_digits=6)
     purchase_count = models.BigIntegerField(default=0)
@@ -40,6 +40,6 @@ class Album(models.Model):
     artists = models.ManyToManyField(Contributor)
     tracks = models.ManyToManyField(Track)
     artwork_id = models.UUIDField()
-    owner_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
     purchase_count = models.BigIntegerField(default=0)
