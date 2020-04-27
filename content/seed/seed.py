@@ -27,6 +27,8 @@ def seed(users):
         [artist.save() for artist in artists]
         num_albums = faker.random.randint(1, 5)
         create_user_albums(num_albums, user, artists)
+        print("user created")
+
 
 
 def create_user_albums(n, user, artists):
