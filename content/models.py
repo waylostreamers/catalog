@@ -1,40 +1,6 @@
 from django.db import models
 
-
 '''
-DDEX metadata format 
-• <TerritoryCode> ISO territory code plus a DDEX code
- for “Worldwide”;
-• <Title> - A composite element for title of the sound recording.
-	 	 DDEX allows for many different kinds of titles. This element takes
- an attribute to identify the type of title being provided, i.e.
- “FormalTitle,” “DisplayTitle,” or “AbbreviatedDisplayTitle”;
-• <DisplayArtist> - A composite element used to specify the artist
- associated with each sound recording. It includes elements to
-	 	 specify an artist’s name as well as an optional <ArtistRole> element;
-• <ResourceContributor> - DDEX includes the concept of a
-	 	 contributor. This field can be used to list contributing artists such
- as guest rappers, soloists, etc;
-• <LabelName> - An element for the label name;
-• <PLine> - A composite element that identifies the year of first
- release of the Resource or Release followed by the name of the
- entity that owns the phonographic rights in the Resource or
- Release;
-• <Genre> - A composite element used to specify genre
- information;
-• <ParentalWarningType> - The element used to identify whether
-	 	 the file includes explicit content or not;
-• <TechnicalSoundRecordingDetails> - A composite element that
-	 	 includes all the technical details about an audio file, such as the
- codec, bit rate, number of channels, etc. This element also contains
-	 	 the file name and hash sum of the file; and
-• <IsPreview> - Indication of whether the Resource is a preview
-	 	 of an associated full Resource. <Video>.
-
-'''
-
-'''
-
 an uploader ( band or a label or an artist )
 
 '''
@@ -43,7 +9,7 @@ class User(models.Model):
     #first_name = models.TextField()
     first_name = models.CharField(max_length = 256)
     #last_name = models.TextField()
-    last_name = CharField(max_length = 256)
+    last_name = models.CharField(max_length = 256)
     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
 
 '''
@@ -67,7 +33,7 @@ class Artist(models.Model):
     current_location = models.CharField(max_length = 256)
     gender = models.CharField(max_length = 256)
     nationality = models.CharField(max_length = 256)
-    related_artists = models.ArrayField(models.CharField(max_length=100))
+   # related_artists = models.ArrayField(models.CharField(max_length=100))
     artist_url = models.TextField() # ( www.waylostreams.com/seanwayland )
     external_urls = models.ArrayField(models.CharField(max_length=256)) # ( ['www.seanwayland.com','facebook/sean']  )
 
@@ -94,9 +60,10 @@ class Track(models.Model):
     #title = models.TextField()
     title = models.CharField(max_length = 256)
     # I think it makes sense to have a text field for artist attached to the track
-    display_artist = models.CharField(max_length = 256)
+    #display_artist = models.CharField(max_length = 256)
     artists = models.ManyToManyField(Contributor)
     audio_file_id = models.UUIDField()
+    track_url = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
     stream_cost = models.DecimalField(decimal_places=4, max_digits=6)
@@ -105,14 +72,20 @@ class Track(models.Model):
     track_credits = models.TextField()
     artwork_id = models.UUIDField()
     genres = models.TextField()
+    '''
+    bitrate, sampleriate, filetype, length, size , interleaved / mono
+    https://github.com/sshaw/ddex/blob/master/lib/ddex/ern/v35/technical_sound_recording_details.rb
+    '''
     technical_sound_recording_details = models.TextField()
+        # url is either a store of the location in say an s3 bucket or a link to the track on waylostreams
+
 
 
 class Album(models.Model):
     upc = models.IntegerField()
 
     # I think it makes sense to have a text field for artist attached to the album
-    display_artist = models.CharField(max_length = 256)
+    #display_artist = models.CharField(max_length = 256)
     #title = models.TextField()
     title = models.CharField(max_length = 256)
     # this is actually titles (plural) in ddex
@@ -124,6 +97,7 @@ class Album(models.Model):
     release_date = models.DateField()
     upload_date = models.DateField()
     remaster_date = models.DateField()
+    start_date_time = models.DateField()
     artists = models.ManyToManyField(Contributor)
     tracks = models.ManyToManyField(Track)
     artwork_id = models.UUIDField()
@@ -137,10 +111,9 @@ class Album(models.Model):
     genres=  models.ManyToManyField(Genre)
 
     # let's assume this one is a formatted string
-    technical_sound_recording_details = models.TextField()
+
     available_markets = models.ArrayField(models.CharField(max_length=10))
-    # url is either a store of the location in say an s3 bucket or a link to the track on waylostreams
-    track_url = models.TextField()
+
 
 class Genre(models.Model):
 
