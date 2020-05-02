@@ -8,78 +8,146 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Artist',
+            name="Artist",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField()),
-                ('artwork_id', models.UUIDField(null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.TextField()),
+                ("artwork_id", models.UUIDField(null=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Contributor',
+            name="Contributor",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='content.Artist')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "artist",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="content.Artist"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Role',
+            name="Role",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254)),
-                ('first_name', models.TextField()),
-                ('last_name', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254)),
+                ("first_name", models.TextField()),
+                ("last_name", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='Track',
+            name="Track",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('isrc', models.CharField(max_length=12)),
-                ('title', models.TextField()),
-                ('audio_file_id', models.UUIDField()),
-                ('purchase_cost', models.DecimalField(decimal_places=4, max_digits=6)),
-                ('stream_cost', models.DecimalField(decimal_places=4, max_digits=6)),
-                ('purchase_count', models.BigIntegerField(default=0)),
-                ('stream_count', models.BigIntegerField(default=0)),
-                ('artists', models.ManyToManyField(to='content.Contributor')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='content.User')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("isrc", models.CharField(max_length=12)),
+                ("title", models.TextField()),
+                ("audio_file_id", models.UUIDField()),
+                ("purchase_cost", models.DecimalField(decimal_places=4, max_digits=6)),
+                ("stream_cost", models.DecimalField(decimal_places=4, max_digits=6)),
+                ("purchase_count", models.BigIntegerField(default=0)),
+                ("stream_count", models.BigIntegerField(default=0)),
+                ("artists", models.ManyToManyField(to="content.Contributor")),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="content.User"
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='contributor',
-            name='role',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='content.Role'),
+            model_name="contributor",
+            name="role",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="content.Role",
+            ),
         ),
         migrations.AddField(
-            model_name='artist',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='content.User'),
+            model_name="artist",
+            name="owner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="content.User"
+            ),
         ),
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('upc', models.IntegerField()),
-                ('title', models.TextField()),
-                ('artwork_id', models.UUIDField()),
-                ('purchase_cost', models.DecimalField(decimal_places=4, max_digits=6)),
-                ('purchase_count', models.BigIntegerField(default=0)),
-                ('artists', models.ManyToManyField(to='content.Contributor')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='content.User')),
-                ('tracks', models.ManyToManyField(to='content.Track')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("upc", models.IntegerField()),
+                ("title", models.TextField()),
+                ("artwork_id", models.UUIDField()),
+                ("purchase_cost", models.DecimalField(decimal_places=4, max_digits=6)),
+                ("purchase_count", models.BigIntegerField(default=0)),
+                ("artists", models.ManyToManyField(to="content.Contributor")),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="content.User"
+                    ),
+                ),
+                ("tracks", models.ManyToManyField(to="content.Track")),
             ],
         ),
     ]
