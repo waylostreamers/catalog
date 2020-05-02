@@ -7,15 +7,9 @@ class User(models.Model):
     last_name = models.TextField()
 
 
-
-
-
-
 class Artist(models.Model):
-    name=models.TextField()
+    name = models.TextField()
     artwork_id = models.UUIDField(null=True)
-
-
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
