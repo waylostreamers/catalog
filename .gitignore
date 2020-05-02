@@ -1,1 +1,6 @@
 db.sqlite3
+.env
+.envrc
+.direnv/
+*.idea*
+*__pycache__*
