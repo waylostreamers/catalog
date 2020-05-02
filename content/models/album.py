@@ -6,11 +6,13 @@ from .user import User
 from .contributor import Contributor
 from .location import Location
 
+
 class Album(models.Model):
     """
     An album is a collection of one or more tracks.
     It also associates various other metadata as shown here.
     """
+
     upc = models.IntegerField()
     title = models.CharField(max_length=256)
     release_date = models.DateField()
@@ -28,4 +30,6 @@ class Album(models.Model):
     # rights_agreement = models.ManyToManyField(Rights_Agreement)
     genres = models.ManyToManyField(Genre)
     # available_markets = models.ArrayField(models.CharField(max_length=10))
-    recording_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    recording_location = models.ForeignKey(
+        Location, on_delete=models.SET_NULL, null=True
+    )

@@ -30,7 +30,6 @@ def seed(users):
         print("user created")
 
 
-
 def create_user_albums(n, user, artists):
     for i in range(n):
         album_artists = artists

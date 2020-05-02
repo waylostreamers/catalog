@@ -14,5 +14,6 @@ class Contributor(models.Model):
     on "Pistachio" (Album)
     The contributor is (Artist=Keith Carlock, Role=drummer)
     """
+
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
