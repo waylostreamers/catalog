@@ -51,3 +51,6 @@ class Role(models.Model):
     ]
 
     description = models.CharField(max_length=256, choices=CHOICES, default=PRIMARY)
+
+    class Meta:
+        db_table = 'content"."role'

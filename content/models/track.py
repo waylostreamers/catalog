@@ -4,6 +4,8 @@ from .soundrecording import SoundRecording
 from .user import User
 from .contributor import Contributor
 
+TRACK = 'content"."track'
+TRACK_CONTRIBUTOR = 'content"."track_contributor'
 
 class Track(models.Model):
     """
@@ -12,7 +14,7 @@ class Track(models.Model):
 
     isrc = models.CharField(max_length=12)
     title = models.CharField(max_length=256)
-    contributors = models.ManyToManyField(Contributor)
+    contributors = models.ManyToManyField(Contributor, through='TrackContributor')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
     stream_cost = models.DecimalField(decimal_places=4, max_digits=6)
@@ -23,3 +25,15 @@ class Track(models.Model):
     sound_recording = models.ForeignKey(
         SoundRecording, on_delete=models.SET_NULL, null=True
     )
+
+    class Meta:
+        db_table = TRACK
+
+
+class TrackContributor(models.Model):
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = TRACK_CONTRIBUTOR
+

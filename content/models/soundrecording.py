@@ -9,3 +9,6 @@ class SoundRecording(models.Model):
     size = models.IntegerField()  # in MB
     channels = models.IntegerField()
     file_id = models.UUIDField()
+
+    class Meta:
+        db_table = 'content"."soundrecording'

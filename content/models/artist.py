@@ -24,6 +24,9 @@ class Artist(models.Model):
     bio = models.TextField(null=True)
     external_urls = ArrayField(models.CharField(max_length=256))
 
+    class Meta:
+        db_table = 'content"."artist'
+
 
 class Alias(models.Model):
     """
@@ -35,3 +38,6 @@ class Alias(models.Model):
     name = models.CharField(max_length=256)
     default = models.BooleanField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'content"."alias'

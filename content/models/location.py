@@ -17,3 +17,6 @@ class Location(models.Model):
     latitude = models.DecimalField(max_digits=24, decimal_places=15, null=True)
     longitude = models.DecimalField(max_digits=24, decimal_places=15, null=True)
     phone_number = models.CharField(max_length=100, null=True)
+
+    class Meta:
+        db_table = 'content"."location'
