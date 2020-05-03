@@ -4,6 +4,7 @@ exclude = '''
   /(
       \.direnv
     | venv
+    | content/migrations
   )/
 )
 '''

@@ -35,13 +35,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "content.apps.ContentConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "content.apps.ContentConfig",
 ]
 
 MIDDLEWARE = [
@@ -79,6 +79,7 @@ WSGI_APPLICATION = "waylometadata.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES["default"]["OPTIONS"] = {"options": "-c search_path=public,content"}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
