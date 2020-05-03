@@ -12,6 +12,7 @@ ALBUM_CONTRIBUTOR = 'content"."album_contributor'
 ALBUM_TRACK = 'content"."album_track'
 ALBUM_GENRE = 'content"."album_genre'
 
+
 class Album(models.Model):
     """
     An album is a collection of one or more tracks.
@@ -24,16 +25,18 @@ class Album(models.Model):
     upload_date = models.DateField()
     remaster_date = models.DateField(null=True)
     start_datetime = models.DateField()
-    contributors = models.ManyToManyField(Contributor, through='AlbumContributor')
-    tracks = models.ManyToManyField(Track, through='AlbumTrack')
+    contributors = models.ManyToManyField(Contributor, through="AlbumContributor")
+    tracks = models.ManyToManyField(Track, through="AlbumTrack")
     artwork_id = models.UUIDField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
     purchase_count = models.BigIntegerField(default=0)
     label_name = models.CharField(max_length=256, null=True)
     notes = models.TextField(null=True)
-    rights_agreement = models.ForeignKey(RightsAgreement, on_delete=models.SET_NULL, null=True)
-    genres = models.ManyToManyField(Genre, through='AlbumGenre')
+    rights_agreement = models.ForeignKey(
+        RightsAgreement, on_delete=models.SET_NULL, null=True
+    )
+    genres = models.ManyToManyField(Genre, through="AlbumGenre")
     # available_markets = models.ArrayField(models.CharField(max_length=10))
     recording_location = models.ForeignKey(
         Location, on_delete=models.SET_NULL, null=True
@@ -48,14 +51,15 @@ class AlbumContributor(models.Model):
     contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = ALBUM_CONTRIBUTOR 
+        db_table = ALBUM_CONTRIBUTOR
+
 
 class AlbumTrack(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     track = models.ForeignKey(Track, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = ALBUM_TRACK 
+        db_table = ALBUM_TRACK
 
 
 class AlbumGenre(models.Model):
@@ -63,4 +67,4 @@ class AlbumGenre(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = ALBUM_GENRE 
+        db_table = ALBUM_GENRE

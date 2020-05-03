@@ -79,9 +79,7 @@ WSGI_APPLICATION = "waylometadata.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {"default": env.db("DATABASE_URL")}
-DATABASES["default"]["OPTIONS"] = {
-    'options': '-c search_path=public,content'
-}
+DATABASES["default"]["OPTIONS"] = {"options": "-c search_path=public,content"}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 

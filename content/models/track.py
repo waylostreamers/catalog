@@ -7,6 +7,7 @@ from .contributor import Contributor
 TRACK = 'content"."track'
 TRACK_CONTRIBUTOR = 'content"."track_contributor'
 
+
 class Track(models.Model):
     """
     A track/song. A user may upload songs and define their metadata here.
@@ -14,7 +15,7 @@ class Track(models.Model):
 
     isrc = models.CharField(max_length=12)
     title = models.CharField(max_length=256)
-    contributors = models.ManyToManyField(Contributor, through='TrackContributor')
+    contributors = models.ManyToManyField(Contributor, through="TrackContributor")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
     stream_cost = models.DecimalField(decimal_places=4, max_digits=6)
@@ -36,4 +37,3 @@ class TrackContributor(models.Model):
 
     class Meta:
         db_table = TRACK_CONTRIBUTOR
-
