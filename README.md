@@ -4,22 +4,37 @@ The concept here is to manage content metadata using the Django framework, but n
 
 # Requirements
 1. Python 3
-2. Pipenv
+2. Postgres
 
 # Install
 ```
-pipenv install
-pipenv shell
+git clone https://github.com/waylostreamers/metadata_experiment.git
+cd metadata_experiment
+
+# Install dependencies
+python3 -m virtualenv venv && \
+  source venv/bin/activate && \
+  pip3 install -r requirements.txt && \
+  deactivate
+
+# POSTGRES is required
+createdb waylo
+psql postgres://localhost:5432/waylo
+>>> CREATE SCHEMA content;
+>>> GRANT ALL ON SCHEMA content TO admin;
+>>> \q
+
+# Enter virtual environment
+source venv/bin/activate
+
+export DATABASE_URL=postgres://admin@localhost:5432/waylo
+
+python manage.py migrate
 ```
 
-# Seed Database
+# Seed Database (Currently not working)
 
 To setup database with seed data:
 ```
-pipenv shell
-python manage.py migrate
 python manage.py seed
-
-# To explore data, you can use sqlite3
-sqlite3 db.sqlite
 ```

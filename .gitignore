@@ -4,3 +4,4 @@ db.sqlite3
 .direnv/
 *__pycache__*
 .idea/
+venv
