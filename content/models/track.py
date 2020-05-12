@@ -25,7 +25,7 @@ class Track(models.Model):
     stream_count = models.BigIntegerField(default=0)
     notes = models.TextField()  # Flexible text blob for extra credits/liner notes etc.
     artwork_id = models.UUIDField()
-    composition = models.ForeignKey(Composition,  on_delete=models.SET_NULL, null=True )
+    composition = models.ForeignKey(Composition, on_delete=models.SET_NULL, null=True)
     sound_recording = models.ForeignKey(
         SoundRecording, on_delete=models.SET_NULL, null=True
     )

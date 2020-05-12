@@ -19,7 +19,6 @@ class Composition(models.Model):
 
     notes = models.TextField()  # Flexible text blob for extra credits/liner notes etc.
 
-
     class Meta:
         db_table = COMPOSITION
 
