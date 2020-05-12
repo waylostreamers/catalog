@@ -10,12 +10,13 @@ from .models import (
     Contributor,
     Genre,
     Location,
-    RightsAgreement,
     Role,
     SoundRecording,
     Track,
     TrackContributor,
     User,
+    Composition,
+    CompositionContributor
 )
 
 models = [
@@ -28,12 +29,13 @@ models = [
     Contributor,
     Genre,
     Location,
-    RightsAgreement,
     Role,
     SoundRecording,
     Track,
     TrackContributor,
     User,
+    Composition,
+    CompositionContributor
 ]
 
 # Register your models here.
