@@ -16,7 +16,7 @@ from .models import (
     TrackContributor,
     User,
     Composition,
-    CompositionContributor
+    CompositionContributor,
 )
 
 models = [
@@ -35,7 +35,7 @@ models = [
     TrackContributor,
     User,
     Composition,
-    CompositionContributor
+    CompositionContributor,
 ]
 
 # Register your models here.
