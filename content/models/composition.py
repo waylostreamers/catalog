@@ -16,7 +16,6 @@ class Composition(models.Model):
     title = models.CharField(max_length=256)
     contributors = models.ManyToManyField(Contributor, through="CompositionContributor")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-
     notes = models.TextField()  # Flexible text blob for extra credits/liner notes etc.
 
     class Meta:

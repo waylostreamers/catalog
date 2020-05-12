@@ -5,7 +5,6 @@ from .genre import Genre
 from .user import User
 from .contributor import Contributor
 from .location import Location
-from .rightsagreement import RightsAgreement
 
 ALBUM = 'content"."album'
 ALBUM_CONTRIBUTOR = 'content"."album_contributor'
@@ -33,9 +32,6 @@ class Album(models.Model):
     purchase_count = models.BigIntegerField(default=0)
     label_name = models.CharField(max_length=256, null=True)
     notes = models.TextField(null=True)
-    rights_agreement = models.ForeignKey(
-        RightsAgreement, on_delete=models.SET_NULL, null=True
-    )
     genres = models.ManyToManyField(Genre, through="AlbumGenre")
     # available_markets = models.ArrayField(models.CharField(max_length=10))
     recording_location = models.ForeignKey(
