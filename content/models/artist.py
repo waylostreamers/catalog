@@ -11,6 +11,7 @@ class Artist(models.Model):
     """
 
     artwork_id = models.UUIDField(null=True)
+    isni = models.CharField(max_length=16, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True)
     birth_location = models.ForeignKey(
