@@ -3,11 +3,9 @@ from django.db import models
 
 class Role(models.Model):
     """
-    A description of the action that an artist
-    may perform on a track or album.
-    For example,
-        | If you are the producer then please
-        | produce us a bottle of decent chardonnay.
+    A description of the action that an artist may perform on a track or album. For example,
+    "If you are the producer then please produce us a bottle of decent chardonnay."
+
     """
 
     PRIMARY = "PRIMARY"
