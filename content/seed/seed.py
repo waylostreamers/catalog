@@ -6,8 +6,20 @@ from faker import Faker
 from django.core import serializers
 
 from .providers import TitleProvider, RoleProvider, ISRCProvider
+
 # are all these models needed to seed ?
-from ..models import Album, Artist, Composition, Contributor, Genre, Location, Role, SoundRecording, Track, User
+from ..models import (
+    Album,
+    Artist,
+    Composition,
+    Contributor,
+    Genre,
+    Location,
+    Role,
+    SoundRecording,
+    Track,
+    User,
+)
 
 faker = Faker()
 faker.add_provider(TitleProvider)
@@ -42,15 +54,16 @@ def create_user_albums(n, user, artists):
 
 def create_user():
     return User(
-        email=faker.email(), first_name=faker.first_name(), last_name=faker.last_name()
-        # added location
-        location = create_location()
+        email=faker.email(),
+        first_name=faker.first_name(),
+        last_name=faker.last_name(),
+        location=create_location(),
     )
 
 
 def create_artist(user):
-   # return Artist(name=faker.name(), owner=user)
-    return Artist( owner=user, current_location = create_location(), birth_location = create_location()
+    return Artist(
+        owner=user, current_location=create_location(), birth_location=create_location()
     )
 
 
@@ -67,18 +80,18 @@ def create_track(user, artists=List):
     track = Track(
         isrc=faker.isrc(),
         title=faker.title(),
-        #audio_file_id=faker.uuid4(),
+        # audio_file_id=faker.uuid4(),
         # soundrecording?
         owner=user,
         purchase_cost=1,
         stream_cost=0.01,
         ## added
-        composition = create_composition(user)
+        composition=create_composition(user),
     )
     track.save()
     contributors = [Contributor(artist=artist, role=faker.role()) for artist in artists]
-    [contributor.save() for contributor in contributors] # this line is hard to understand why an array ?
-    [track.artists.add(contributor) for contributor in contributors] # ditto
+    [contributor.save() for contributor in contributors]
+    [track.artists.add(contributor) for contributor in contributors]
     return track
 
 
@@ -97,16 +110,16 @@ def create_album(user, tracks, artists):
     [album.tracks.add(track) for track in tracks]
     return album
 
+
 ## added create location
+
 
 def create_location():
     return Location(
-    address_one = faker.street_address() , city = faker.city(), country = faker.country()
+        address_one=faker.street_address(), city=faker.city(), country=faker.country()
     )
+
+
 ## added create composition
 def create_composition(user):
-    return Composition(
-    title = faker.title(),
-    user = user
-
-    )
+    return Composition(title=faker.title(), user=user)
