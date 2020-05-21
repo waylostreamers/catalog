@@ -57,3 +57,22 @@ To setup database with seed data:
 ```
 python manage.py seed
 ```
+
+# Python Docs View
+
+You can browse auto-generated documentation from the source code by doing the following:
+1. Ensure you have an up-to-date virtualenv
+```
+source venv/bin/activate
+pip install -r requirements
+```
+2. Add a django superuser
+```
+python manage.py createsuperuser
+...
+```
+3. Run the django server
+```
+python manage.py runserver
+```
+4. Go to `localhost:8000/admin/doc/` in your browser
