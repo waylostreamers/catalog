@@ -1,7 +1,7 @@
 from faker import Faker
 
-# from ..models import Artist, Alias
-# from ..models import RoleProvider, ISNIProvider
+from ..models import Artist, Alias
+from ..models import RoleProvider, ISNIProvider
 
 fake = Faker()
 
