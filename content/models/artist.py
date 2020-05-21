@@ -23,7 +23,7 @@ class Artist(models.Model):
     gender = models.CharField(max_length=256, null=True)
     nationality = models.CharField(max_length=256, null=True)
     bio = models.TextField(null=True)
-    external_urls = ArrayField(models.CharField(max_length=256))
+    external_urls = ArrayField(models.CharField(max_length=256), null=True)
 
     class Meta:
         db_table = 'content"."artist'

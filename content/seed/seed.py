@@ -7,7 +7,6 @@ from django.core import serializers
 
 from .providers import TitleProvider, RoleProvider, ISRCProvider
 
-# are all these models needed to seed ?
 from ..models import (
     Album,
     Artist,
@@ -85,7 +84,6 @@ def create_track(user, artists=List):
         owner=user,
         purchase_cost=1,
         stream_cost=0.01,
-        ## added
         composition=create_composition(user),
     )
     track.save()

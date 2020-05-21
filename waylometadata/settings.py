@@ -31,6 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Custom test runner
+TEST_RUNNER = "content.testrunner.PostgresSchemaTestRunner"
+
 
 # Application definition
 
