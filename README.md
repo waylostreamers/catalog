@@ -17,7 +17,7 @@ cd catalog
 docker-compose up -d
 ./setup.sh
 ```
-You should now be able to go to https://localhost:8000/admin
+You should now be able to go to http://localhost:8000/admin
 and login to the Django admin UI with the username "admin" and password "password".
 
 To kill the docker containers (this will also destroy the database):
