@@ -2,14 +2,46 @@
 
 The concept here is to manage content metadata using the Django framework, but not necessarily use this to directly back the user-facing app.
 
-# Requirements
+# Setup the Easy Way - with docker for mac
+
+## Requirements
+1. Docker (https://docs.docker.com/docker-for-mac/install/)
+2. Docker Compose (https://docs.docker.com/compose/install/)
+
+After installing both of the above:
+## Install
+```
+git clone https://github.com/waylostreamers/catalog.git
+cd catalog
+
+docker-compose up -d
+./setup.sh
+```
+You should now be able to go to https://localhost:8000/admin
+and login to the Django admin UI with the username "admin" and password "password".
+
+To kill the docker containers (this will also destroy the database):
+```
+docker-compose down
+```
+
+To call django management commands, use the django helper script:
+```
+./django migrate
+# is equivalent to:
+python manage.py migrate
+# except that it runs inside the docker container
+```
+
+# Setup - without docker
+## Requirements
 1. Python 3
 2. Postgres
 
 # Install
 ```
-git clone https://github.com/waylostreamers/metadata_experiment.git
-cd metadata_experiment
+git clone https://github.com/waylostreamers/catalog.git
+cd catalog
 
 # Install dependencies
 python3 -m virtualenv venv && \
@@ -17,36 +49,22 @@ python3 -m virtualenv venv && \
   pip3 install -r requirements.txt && \
   deactivate
   
-**On Sean's windows 10 running python 3.6 and 3.8**
-python -m virtualenv venv && \
-  source venv/bin/activate && \
-  pip3 install -r requirements.txt && \
-  deactivate  
   
- ** sean's path to "activate is venv/Scripts/activate
-  
-
 # POSTGRES is required
-createdb waylo
-psql postgres://localhost:5432/waylo
+createdb catalog
+psql postgres://localhost:5432/catalog
 >>> CREATE SCHEMA content;
 >>> GRANT ALL ON SCHEMA content TO admin;
 >>> \q
 
 
-** sean's postgres username is postgres not admin 
-** GRANT ALL ON SCHEMA content TO postgres;
+GRANT ALL ON SCHEMA content TO postgres;
 
 
 # Enter virtual environment
 source venv/bin/activate
 
-
-
-export DATABASE_URL=postgres://admin@localhost:5432/waylo
-
-#for sean
-export DATABASE_URL=postgres://postgres@localhost:5432/waylo
+export DATABASE_URL=postgres://admin@localhost:5432/catalog
 
 python manage.py migrate
 ```
