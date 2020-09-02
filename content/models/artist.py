@@ -23,7 +23,11 @@ class Artist(models.Model):
     gender = models.CharField(max_length=256, null=True)
     nationality = models.CharField(max_length=256, null=True)
     bio = models.TextField(null=True)
-    external_urls = ArrayField(models.CharField(max_length=256), null=True)
+    external_urls = ArrayField(models.CharField(max_length=256, null=True), null=True)
+
+    @property
+    def name(self):
+        return self.alias_set.get(default=True).name
 
     class Meta:
         db_table = 'content"."artist'

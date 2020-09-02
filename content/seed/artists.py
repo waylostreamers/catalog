@@ -1,7 +1,6 @@
 from faker import Faker
 
 from ..models import Artist, Alias
-from ..models import RoleProvider, ISNIProvider
 
 fake = Faker()
 
@@ -15,7 +14,7 @@ def create_user_artists(user):
 
 
 def create_artist(user, is_user=False):
-    artist = Artist(owner=user, isni=fake.isni())
+    artist = Artist(owner=user)
     artist.save()
     default_alias = create_alias(artist)
     if fake.boolean(chance_of_getting_true=5):
@@ -27,7 +26,7 @@ def create_artist(user, is_user=False):
 
 def create_alias(artist, alias_of=None):
     if type(alias_of) is Alias:
-        name = alias_of.name()
+        name = alias_of.name
         alias = Alias(name=get_initials(name), default=False, artist=artist)
     else:
         alias = Alias(name=fake.name(), default=True, artist=artist)

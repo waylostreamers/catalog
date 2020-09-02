@@ -19,12 +19,13 @@ class Track(models.Model):
 
     contributors = models.ManyToManyField(Contributor, through="TrackContributor")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
-    stream_cost = models.DecimalField(decimal_places=4, max_digits=6)
+    purchase_cost = models.DecimalField(decimal_places=4, max_digits=6, null=True)
+    stream_cost = models.DecimalField(decimal_places=4, max_digits=6, null=True)
     purchase_count = models.BigIntegerField(default=0)
     stream_count = models.BigIntegerField(default=0)
-    notes = models.TextField()  # Flexible text blob for extra credits/liner notes etc.
-    artwork_id = models.UUIDField()
+    notes = models.TextField(
+        null=True
+    )  # Flexible text blob for extra credits/liner notes etc.
     composition = models.ForeignKey(Composition, on_delete=models.SET_NULL, null=True)
     sound_recording = models.ForeignKey(
         SoundRecording, on_delete=models.SET_NULL, null=True

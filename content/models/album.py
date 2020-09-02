@@ -18,22 +18,21 @@ class Album(models.Model):
     It also associates various other metadata as shown here.
     """
 
-    upc = models.IntegerField()
+    upc = models.BigIntegerField()
     title = models.CharField(max_length=256)
-    release_date = models.DateField()
-    upload_date = models.DateField()
+    release_date = models.DateField(null=True)
+    upload_date = models.DateField(null=True)
     remaster_date = models.DateField(null=True)
-    start_datetime = models.DateField()
+    start_datetime = models.DateField(null=True)
     contributors = models.ManyToManyField(Contributor, through="AlbumContributor")
     tracks = models.ManyToManyField(Track, through="AlbumTrack")
-    artwork_id = models.UUIDField()
+    artwork_id = models.UUIDField(null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    purchase_cost = models.DecimalField(decimal_places=4, max_digits=6)
+    purchase_cost = models.DecimalField(decimal_places=4, max_digits=6, null=True)
     purchase_count = models.BigIntegerField(default=0)
     label_name = models.CharField(max_length=256, null=True)
     notes = models.TextField(null=True)
     genres = models.ManyToManyField(Genre, through="AlbumGenre")
-    # available_markets = models.ArrayField(models.CharField(max_length=10))
     recording_location = models.ForeignKey(
         Location, on_delete=models.SET_NULL, null=True
     )

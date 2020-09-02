@@ -1,9 +1,10 @@
 from faker import Faker
 from faker.providers import BaseProvider
 
-from ..models import Role
+from ..models import Roles
 
 faker = Faker()
+roles = Roles()
 
 
 class TitleProvider(BaseProvider):
@@ -13,10 +14,10 @@ class TitleProvider(BaseProvider):
 
 
 class RoleProvider(BaseProvider):
-    contributor_roles = ["primary", "featured"]
+    choices = [roles.PRIMARY, roles.FEATURED]
 
     def role(self):
-        return Role.objects.get(description=faker.random.choice(self.contributor_roles))
+        return faker.random.choice(self.choices)
 
 
 class ISRCProvider(BaseProvider):

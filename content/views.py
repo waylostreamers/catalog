@@ -1,6 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic.list import ListView
 
-# Create your views here.
+from .models import Album, Artist
+
+
+class AlbumsView(ListView):
+    model = Album
+    paginate_by = 10
+    template_name = "albums.html"
+
+
+class ArtistsView(ListView):
+    model = Artist
+    paginate_by = 10
+    template_name = "artists.html"
+
+
 def index(request):
-    return HttpResponse("Waylostreams Content Metadata Manager")
+    return render(request, "index.html")

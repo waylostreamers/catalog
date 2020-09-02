@@ -63,7 +63,7 @@ ROOT_URLCONF = "waylometadata.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["content.templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -4,8 +4,10 @@ from typing import List
 
 from faker import Faker
 from django.core import serializers
+from django.db import transaction
 
 from .providers import TitleProvider, RoleProvider, ISRCProvider
+from .artists import create_artist
 
 from ..models import (
     Album,
@@ -14,7 +16,7 @@ from ..models import (
     Contributor,
     Genre,
     Location,
-    Role,
+    Roles,
     SoundRecording,
     Track,
     User,
@@ -25,21 +27,19 @@ faker.add_provider(TitleProvider)
 faker.add_provider(RoleProvider)
 faker.add_provider(ISRCProvider)
 
-CONTRIBUTOR_ROLES = ["primary", "featured"]
 
-
+@transaction.atomic
 def seed(users):
+    print("Seeding database...")
     users = [create_user() for n in range(users)]
-    [user.save() for user in users]
     user_map = {user.id: {"user": user} for user in users}
-    create_roles()
     for user in users:
         num_artists = faker.random.randint(1, 10)
-        artists = [create_artist(user) for n in range(num_artists)]
+        artists = [create_artist(user, True) for n in range(num_artists)]
         [artist.save() for artist in artists]
         num_albums = faker.random.randint(1, 5)
         create_user_albums(num_albums, user, artists)
-        print("user created")
+    print(f"Generated {len(users)} users with randomized track and album data.")
 
 
 def create_user_albums(n, user, artists):
@@ -52,44 +52,34 @@ def create_user_albums(n, user, artists):
 
 
 def create_user():
-    return User(
+    user = User(
         email=faker.email(),
         first_name=faker.first_name(),
         last_name=faker.last_name(),
         location=create_location(),
     )
-
-
-def create_artist(user):
-    return Artist(
-        owner=user, current_location=create_location(), birth_location=create_location()
-    )
-
-
-def create_roles():
-    roles = [Role(description=desc) for desc in CONTRIBUTOR_ROLES]
-    [role.save() for role in roles]
+    user.save()
+    return user
 
 
 def create_contributor(artist, role=None):
-    return Contributor(artist=artist, role=role or faker.role())
+    contributor = Contributor(artist=artist, role=role or faker.role())
+    contributor.save()
+    return contributor
 
 
 def create_track(user, artists=List):
     track = Track(
         isrc=faker.isrc(),
         title=faker.title(),
-        # audio_file_id=faker.uuid4(),
-        # soundrecording?
         owner=user,
         purchase_cost=1,
         stream_cost=0.01,
         composition=create_composition(user),
     )
     track.save()
-    contributors = [Contributor(artist=artist, role=faker.role()) for artist in artists]
-    [contributor.save() for contributor in contributors]
-    [track.artists.add(contributor) for contributor in contributors]
+    contributors = [create_contributor(artist, faker.role()) for artist in artists]
+    [track.contributors.add(contributor) for contributor in contributors]
     return track
 
 
@@ -102,22 +92,21 @@ def create_album(user, tracks, artists):
         purchase_cost=10,
     )
     album.save()
-    contributors = [Contributor(artist=artist, role=faker.role()) for artist in artists]
-    [contributor.save() for contributor in contributors]
-    [album.artists.add(contributor) for contributor in contributors]
+    contributors = [create_contributor(artist, faker.role()) for artist in artists]
+    [album.contributors.add(contributor) for contributor in contributors]
     [album.tracks.add(track) for track in tracks]
     return album
 
 
-## added create location
-
-
 def create_location():
-    return Location(
+    location = Location(
         address_one=faker.street_address(), city=faker.city(), country=faker.country()
     )
+    location.save()
+    return location
 
 
-## added create composition
 def create_composition(user):
-    return Composition(title=faker.title(), user=user)
+    composition = Composition(title=faker.title(), owner=user)
+    composition.save()
+    return composition

@@ -18,5 +18,9 @@ class Contributor(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
 
+    @property
+    def name(self):
+        return self.artist.alias_set.filter(default=True)
+
     class Meta:
         db_table = 'content"."contributor'
