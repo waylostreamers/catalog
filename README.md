@@ -33,6 +33,18 @@ python manage.py migrate
 # except that it runs inside the docker container
 ```
 
+# Seed DB and run demo app
+
+To seed database with fake data:
+After running `docker-compose up -d` & `./setup.sh`:
+```
+./django seed --users 10
+```
+to create 10 fake users along with randomized artists and tracks.
+
+Then when you navigate to `localhost:8000` you should be able to view the fake data in the app.
+
+
 # Setup - without docker
 ## Requirements
 1. Python 3
@@ -67,13 +79,6 @@ source venv/bin/activate
 export DATABASE_URL=postgres://admin@localhost:5432/catalog
 
 python manage.py migrate
-```
-
-# Seed Database (Currently not working)
-
-To setup database with seed data:
-```
-python manage.py seed
 ```
 
 # Python Docs View
