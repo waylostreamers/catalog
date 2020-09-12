@@ -99,3 +99,12 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 4. Go to `localhost:8000/admin/doc/` in your browser
+
+
+
+# To commit your code 
+
+```
+docker exec catalog_django_1 black content
+``` 
+Do this first to get the linter to format your code 
