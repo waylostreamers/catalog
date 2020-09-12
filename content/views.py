@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 
-from .models import Album, Artist
+from .models import Album, Artist, Track
 
 
 class AlbumsView(ListView):
@@ -14,6 +14,11 @@ class ArtistsView(ListView):
     model = Artist
     paginate_by = 10
     template_name = "artists.html"
+
+class TracksView(ListView):
+    model = Track
+    paginate_by = 10
+    template_name = "tracks.html"
 
 
 def index(request):
