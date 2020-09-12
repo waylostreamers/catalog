@@ -15,9 +15,10 @@ class ArtistsView(ListView):
     paginate_by = 10
     template_name = "artists.html"
 
+
 class TracksView(ListView):
     model = Track
-    paginate_by = 10
+    paginate_by = 20
     template_name = "tracks.html"
 
 
