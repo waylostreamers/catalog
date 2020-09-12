@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>TRACKS</h4>
+<table>
+  <thead>
+    <tr>
+      <th>TITLE</th>
+      <th>ARTISTS</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for obj in page_obj %}
+    <tr>
+      <td>{{ obj.title }}</td>
+      <td>{{obj.contributors.first.artist.name}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
