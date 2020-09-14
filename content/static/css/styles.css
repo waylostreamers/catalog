@@ -48,3 +48,15 @@ body {
   border-top: 1px solid #ccc;
   padding: 15px;
 }
+.table-row:hover {
+  background-color: #eee;
+}
+.clickable:hover {
+  cursor: pointer;
+}
+.basic-link {
+  text-decoration: none;
+}
+.basic-link:visited {
+  color: black;
+}
