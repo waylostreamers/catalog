@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p>UPC: {{ object.upc }}</p>
+<h4>Track List:</h4>
+<ul>
+  {% for track in object.tracks.all %}
+  <li>{{ track.title }}</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
