@@ -1,22 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <h4>ALBUMS</h4>
-<table>
-  <thead>
-    <tr>
-      <th>UPC</th>
-      <th>TITLE</th>
-      <th>ARTISTS</th>
-    </tr>
-  </thead>
+<table class="table-list">
   <tbody>
   {% for obj in page_obj %}
-    <tr>
-      <td>{{ obj.upc }}</td>
-      <td>{{ obj.title }}</td>
+    <tr class="table-row">
+      <td><a href="{% url 'album-detail' obj.id %}">{{ obj.title }}</a></td>
       <td>{{ obj.contributors.first.artist.name }}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
+{% include 'paginator.html' %}
 {% endblock content %}

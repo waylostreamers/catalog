@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4>Add Content</h4>
+<ul>
+  <li><a href="{% url 'add-artist' %}">Add an artist</a></li>
+  <li><a href="{% url 'add-track' %}">Add a track</a></li>
+  <li><a href="{% url 'add-album' %}">Make an album</a></li>
+</ul>
+{% endblock content %}

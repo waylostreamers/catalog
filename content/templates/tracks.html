@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h4>TRACKS</h4>
-<table>
+<table class="table-list">
   <thead>
     <tr>
       <th>TITLE</th>
@@ -10,11 +10,12 @@
   </thead>
   <tbody>
   {% for obj in page_obj %}
-    <tr>
+    <tr class="table-row">
       <td>{{ obj.title }}</td>
       <td>{{obj.contributors.first.artist.name}}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
+{% include 'paginator.html' %}
 {% endblock content %}

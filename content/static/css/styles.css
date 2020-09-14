@@ -1,0 +1,50 @@
+html {
+  font-size: 20px;
+}
+@media (max-width: 900px) {
+  html { font-size: 16px; }
+}
+@media (max-width: 400px) {
+  html { font-size: 14px; }
+}
+body {
+  font-family: 'Karla', sans-serif;
+}
+.nav {
+  height: 2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+.nav div {
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+.nav div:hover {
+  background: #eee;
+}
+.nav a {
+  text-decoration: none;
+  color: black;
+}
+.nav a:visited {
+  color: black;
+}
+.site-title {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  margin: 0;
+  padding: 10px;
+}
+.table-list {
+  border-collapse: collapse;
+}
+.table-row td {
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  padding: 15px;
+}
