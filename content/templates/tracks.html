@@ -4,9 +4,10 @@
 <table class="table-list">
   <tbody>
   {% for obj in page_obj %}
-    <tr class="table-row">
-      <td>{{ obj.title }}</td>
-      <td>{{obj.contributors.first.artist.name}}</td>
+
+      <tr class="table-row clickable" onclick="document.location = '{% url 'track-detail' obj.id %}'">
+        <td><a class="basic-link" href="{% url 'track-detail' obj.id %}">{{ obj.title }}</a></td>
+        <td>{{ obj.contributor.artist.name }}</td>
     </tr>
   {% endfor %}
   </tbody>
