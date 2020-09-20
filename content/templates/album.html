@@ -2,10 +2,24 @@
 {% block content %}
 <h1>{{ object.title }}</h1>
 <p>UPC: {{ object.upc }}</p>
+<!--
 <h4>Track List:</h4>
 <ul>
   {% for track in object.tracks.all %}
   <li>{{ track.title }}</li>
   {% endfor %}
 </ul>
+-->
+<h4>TRACKS</h4>
+<table class="table-list">
+  <tbody>
+  {% for track in object.tracks.all %}
+
+      <tr class="table-row clickable" onclick="document.location = '{% url 'track-detail' track.id %}'">
+        <td><a class="basic-link" href="{% url 'track-detail' track.id %}">{{ track.title }}</a></td>
+        <!--<td>{{ obj.contributor.artist.name }}</td>-->
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 {% endblock content %}
