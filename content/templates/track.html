@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p>ISRC: {{ object.isrc }}</p>
+<h4>Contributor/Role:</h4>
+<ul>
+  {% for contributor in object.contributors.all %}
+  <li>{{ contributor.role }}</li>
+  <li>{{ contributor.artist.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock content %}

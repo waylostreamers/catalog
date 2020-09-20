@@ -18,6 +18,11 @@ class AlbumDetailView(DetailView):
     template_name = "album.html"
 
 
+class TrackDetailView(DetailView):
+    model = Track
+    template_name = "track.html"
+
+
 class AddAlbumView(FormView):
     template_name = "add_album.html"
     form_class = AlbumForm
