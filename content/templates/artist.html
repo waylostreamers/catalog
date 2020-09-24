@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.name }}</h1>
+
+<h4>ALBUMS:</h4>
+<ul>
+  {% for album in object.album_set.all %}
+  <li>{{ album.title }}</li>
+  {% endfor %}
+  </tr>
+</ul>
+{% endblock content %}
