@@ -20,7 +20,13 @@ class Contributor(models.Model):
 
     @property
     def name(self):
-        return self.artist.alias_set.filter(default=True)
+        return self.artist.name
+
+    def album(self):
+        return self.album_set.first()
+
+    def track(self):
+        return self.track_set.first()
 
     class Meta:
         db_table = 'content"."contributor'

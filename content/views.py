@@ -22,6 +22,7 @@ class TrackDetailView(DetailView):
     model = Track
     template_name = "track.html"
 
+
 class ArtistDetailView(DetailView):
     model = Artist
     template_name = "artist.html"
