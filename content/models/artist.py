@@ -29,6 +29,12 @@ class Artist(models.Model):
     def name(self):
         return self.alias_set.get(default=True).name
 
+    def other_aliases(self):
+        return self.alias_set.filter(default=False)
+
+    def has_other_aliases(self):
+        return self.alias_set.filter(default=False).exists()
+
     def album_contributions(self):
         return self.contributor_set.filter(albumcontributor__isnull=False).all()
 
@@ -49,6 +55,9 @@ class Alias(models.Model):
     name = models.CharField(max_length=256)
     default = models.BooleanField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'content"."alias'

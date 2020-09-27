@@ -17,7 +17,7 @@ def create_artist(user, is_user=False):
     artist = Artist(owner=user)
     artist.save()
     default_alias = create_alias(artist)
-    if fake.boolean(chance_of_getting_true=5):
+    if fake.boolean(chance_of_getting_true=25):
         # A small number of artists have a second alias,
         # which is their initials.
         alt_alias = create_alias(artist, alias_of=default_alias)
