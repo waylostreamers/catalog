@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ object.title }}</h1>
+<h1>Track: {{ object.title }}</h1>
 <p>ISRC: {{ object.isrc }}</p>
-<h4>Contributor/Role:</h4>
-<ul>
-  {% for contributor in object.contributors.all %}
-  <li>{{ contributor.role }}</li>
-  <li>{{ contributor.artist.name }}</li>
+<h4>Appears on albums:</h4>
+<table class="table-list">
+  <tbody>
+  {% for album in object.album_set.all %}
+      <tr class="table-row clickable" onclick="document.location = '{% url 'album-detail' album.id %}'">
+        <td><a class="basic-link" href="{% url 'album-detail' album.id %}">{{ album.title }}</a></td>
+    </tr>
   {% endfor %}
-  </tr>
-</ul>
+  </tbody>
+</table>
+<h4>Artists:</h4>
+<table class="table-list">
+  <tbody>
+  {% for contributor in object.contributors.all %}
+      <tr class="table-row clickable" onclick="document.location = '{% url 'artist-detail' contributor.artist.id %}'">
+        <td><a class="basic-link" href="{% url 'artist-detail' contributor.artist.id %}">{{ contributor.name }}</a></td>
+        <td>{{ contributor.role }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 {% endblock content %}

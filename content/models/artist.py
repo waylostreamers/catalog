@@ -29,6 +29,12 @@ class Artist(models.Model):
     def name(self):
         return self.alias_set.get(default=True).name
 
+    def album_contributions(self):
+        return self.contributor_set.filter(albumcontributor__isnull=False).all()
+
+    def track_contributions(self):
+        return self.contributor_set.filter(trackcontributor__isnull=False).all()
+
     class Meta:
         db_table = 'content"."artist'
 
