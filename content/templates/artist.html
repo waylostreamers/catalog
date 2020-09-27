@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Artist: {{ object.name }}</h1>
-
+{% if object.has_other_aliases %}
+<h4>Also known as:</h4>
+<ul>
+  {% for alias in object.other_aliases %}
+  <li>{{ alias.name }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 <h4>Appears on albums:</h4>
 <table class="table-list">
   <thead>

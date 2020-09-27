@@ -17,10 +17,13 @@ def create_artist(user, is_user=False):
     artist = Artist(owner=user)
     artist.save()
     default_alias = create_alias(artist)
-    if fake.boolean(chance_of_getting_true=5):
+    if fake.boolean(chance_of_getting_true=25):
         # A small number of artists have a second alias,
         # which is their initials.
-        alt_alias = create_alias(artist, alias_of=default_alias)
+        create_alias(artist, alias_of=default_alias)
+    if fake.boolean(chance_of_getting_true=5):
+        # An even smaller number fancy themselves as Prince copycats
+        create_alias_formerly_known_as(artist, alias_of=default_alias)
     return artist
 
 
@@ -32,6 +35,15 @@ def create_alias(artist, alias_of=None):
         alias = Alias(name=fake.name(), default=True, artist=artist)
     alias.save()
     return alias
+
+
+def create_alias_formerly_known_as(artist, alias_of=None):
+    alias_of.default = False
+    alias_of.save()
+    alias = Alias(
+        name=f"The Artist Formerly Known As {alias_of}", default=True, artist=artist,
+    )
+    alias.save()
 
 
 def get_initials(name):
