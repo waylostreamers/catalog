@@ -38,8 +38,10 @@ def create_alias(artist, alias_of=None):
 
 
 def create_alias_formerly_known_as(artist, alias_of=None):
+    alias_of.default = False
+    alias_of.save()
     alias = Alias(
-        name=f"The Artist Formerly Known As {alias_of}", default=False, artist=artist,
+        name=f"The Artist Formerly Known As {alias_of}", default=True, artist=artist,
     )
     alias.save()
 
