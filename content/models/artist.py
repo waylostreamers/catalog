@@ -29,6 +29,7 @@ class Artist(models.Model):
     def name(self):
         return self.alias_set.get(default=True).name
 
+
     def other_aliases(self):
         return self.alias_set.filter(default=False)
 

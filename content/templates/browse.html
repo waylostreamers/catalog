@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<h5>Search</h5>
-<p>Not implemented yet!</p>
+<h5>Search Artists</h5>
+<form type="get" action="/artist_search" style="margin: 0">
+    <input  id="artist_search" type="text" name="artist_search"  placeholder="search artists" >
+    <button id="artist_search" type="submit" >Submit</button>
+</form>
+<h5>Search Albums</h5>
+<form type="get" action="." style="margin: 0">
+    <input  id="album_search_box" type="text" name="album_search_box"  placeholder="search albums" >
+    <button id="album_search_submit" type="submit" >Submit</button>
+</form>
+<h5>Search Tracks</h5>
+<form type="get" action="." style="margin: 0">
+    <input  id="track_search_box" type="text" name="track_search_box"  placeholder="search tracks" >
+    <button id="track_search_submit" type="submit" >Submit</button>
+</form>
 <h5>Browse by:</h5>
 <a href="/albums">ALBUMS</a>
 <a href="/artists">ARTISTS</a>

@@ -17,6 +17,8 @@ urlpatterns = [
     path("/track/<slug:pk>/", views.TrackDetailView.as_view(), name="track-detail"),
     path("/artist/<slug:pk>/", views.ArtistDetailView.as_view(), name="artist-detail"),
     path("artists/", views.ArtistsView.as_view(), name="artists"),
+    path("artist_search/", views.artist_search, name="artists-search"),
+    
     path("tracks/", views.TracksView.as_view(), name="tracks"),
     path("", views.index, name="index"),
 ]

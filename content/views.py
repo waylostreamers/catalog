@@ -40,6 +40,8 @@ class ArtistsView(ListView):
     template_name = "artists.html"
 
 
+
+
 class AddArtistView(FormView):
     template_name = "add_artist.html"
     form_class = ArtistForm
@@ -56,6 +58,15 @@ class AddTrackView(FormView):
     template_name = "add_track.html"
     form_class = TrackForm
     success_url = "/add/"
+
+def artist_search(request):
+    ''' This could be your actual view or a new one '''
+    # Your code
+    if request.method == 'GET': # If the form is submitted
+        search_query = request.GET.get('artist_search', None)
+        # Do whatever you need with the word the user looked for
+        result = Artist.objects.filter(name__contains=search_query)
+        return render(result, "artist_search.html")
 
 
 def index(request):

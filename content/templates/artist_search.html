@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>ARTISTS</h4>
+<table class="table-list">
+  <tbody>
+  {% for obj in page_obj %}
+  <h1>Artist: {{ obj.name }}</h1>
+  <!--
+
+      <tr class="table-row clickable" onclick="document.location = '{% url 'artist-detail' obj.id %}'">
+        <td><a class="basic-link" href="{% url 'artist-detail' obj.id %}">{{ obj.name }}</a></td>
+        <td>{% if obj.has_other_aliases %}({{ obj.other_aliases|join:", " }}){% endif %}</td>
+    </tr>
+-->
+  {% endfor %}
+  </tbody>
+</table>
+{% include 'paginator.html' %}
+{% endblock content %}
