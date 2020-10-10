@@ -20,7 +20,6 @@ urlpatterns = [
     path("artist_search/", views.artist_search, name="artists-search"),
     path("album_search/", views.album_search, name="albums-search"),
     path("track_search/", views.track_search, name="tracks-search"),
-    
     path("tracks/", views.TracksView.as_view(), name="tracks"),
     path("", views.index, name="index"),
 ]
