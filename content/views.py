@@ -61,22 +61,23 @@ class AddTrackView(FormView):
 
 def artist_search(request):
     ''' This could be your actual view or a new one '''
-    # Your code
-    #from django.db.models import Q
     if request.method == 'GET': # If the form is submitted
         search_query = request.GET.get('artist_search', None)
-        #result = Artist.objects.filter(Q(owner__first_name__contains='a') | Q(owner__last_name__contains='a'))
-        #result = Artist.objects.filter(owner__first_name__contains=search_query)
-        #result = Artist.objects.filter(owner__first_name__contains=search_query)
-        #result = Artist.objects.filter(artist().name=search_query)
+        result = Artist.objects.filter(alias__name__contains=search_query).distinct()
+        return render(request, "artist_search.html", { "stuff": result })
 
-        filtered = (x for x in Artist.objects.all() if search_query in x.name())
-        filtered_dict  = {'user_data': filtered}
-        #for p in Artist.raw('SELECT owner FROM myapp_artist where ')
-        # Do whatever you need with the word the user looked for
-        #result = Artist.other_aliases(name__contains=search_query)
-        #return render(result, "artist_search.html")
-        return render(request, "artist_search.html", { "stuff": filtered_dict })
+def album_search(request):
+    ''' This could be your actual view or a new one '''
+    if request.method == 'GET': # If the form is submitted
+        search_query = request.GET.get('album_search', None)
+        result = Album.objects.filter(title__contains=search_query).distinct()
+        return render(request, "album_search.html", { "stuff": result })
+def track_search(request):
+    ''' This could be your actual view or a new one '''
+    if request.method == 'GET': # If the form is submitted
+        search_query = request.GET.get('track_search', None)
+        result = Track.objects.filter(title__contains=search_query).distinct()
+        return render(request, "track_search.html", { "stuff": result })
 
 
 def index(request):
