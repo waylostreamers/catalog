@@ -106,5 +106,9 @@ python manage.py runserver
 
 ```
 docker exec catalog_django_1 black content
+git status
+git add .
+git commit -m "commit message " 
+git push --set-upstream origin <branch_name>
 ``` 
-Do this first to get the linter to format your code 
+
