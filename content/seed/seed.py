@@ -1,6 +1,7 @@
 import logging
 from faker import Faker
 from django.db import transaction
+from django.contrib.auth import get_user_model
 
 from ..factories import (
     UserFactory,
@@ -19,6 +20,7 @@ seeded_models = [
     models.Track,
     models.Contributor,
     models.Artist,
+    get_user_model(),
 ]
 
 
