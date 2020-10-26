@@ -21,5 +21,8 @@ urlpatterns = [
     path("album_search/", views.album_search, name="albums-search"),
     path("track_search/", views.track_search, name="tracks-search"),
     path("tracks/", views.TracksView.as_view(), name="tracks"),
+    path("accounts/login/", views.WayloLoginView.as_view(), name="login"),
+    path("accounts/logout/", views.WayloLogoutView.as_view(), name="logout"),
+    path("accounts/profile/", views.user_profile_view, name="profile"),
     path("", views.index, name="index"),
 ]
