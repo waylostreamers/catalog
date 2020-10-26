@@ -1,6 +1,6 @@
 from django.db import models
+from django.conf import settings
 
-from .user import User
 from .contributor import Contributor
 
 COMPOSITION = 'content"."composition'
@@ -15,7 +15,7 @@ class Composition(models.Model):
     iswc = models.CharField(max_length=24)
     title = models.CharField(max_length=256)
     contributors = models.ManyToManyField(Contributor, through="CompositionContributor")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     notes = models.TextField()  # Flexible text blob for extra credits/liner notes etc.
 
     class Meta:

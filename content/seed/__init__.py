@@ -1,1 +1,1 @@
-from .seed import seed
+from .seed import seed, clear_data

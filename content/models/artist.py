@@ -1,7 +1,7 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 
-from .user import User
 from .location import Location
 
 
@@ -12,7 +12,7 @@ class Artist(models.Model):
 
     artwork_id = models.UUIDField(null=True)
     isni = models.CharField(max_length=16, null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True)
     birth_location = models.ForeignKey(
         Location, on_delete=models.SET_NULL, related_name="birth_location", null=True

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 PRIMARY = "PRIMARY"
 FEATURED = "FEATURED"
@@ -58,74 +59,74 @@ class Role(models.Model):
 
 
 class Roles:
-    @property
+    @cached_property
     def PRIMARY(self):
         return Role.objects.get(description=PRIMARY)
 
-    @property
+    @cached_property
     def FEATURED(self):
         return Role.objects.get(description=FEATURED)
 
-    @property
+    @cached_property
     def WRITER(self):
         return Role.objects.get(description=WRITER)
 
-    @property
+    @cached_property
     def PRODUCER(self):
         return Role.objects.get(description=PRODUCER)
 
-    @property
+    @cached_property
     def COMPOSER(self):
         return Role.objects.get(description=COMPOSER)
 
-    @property
+    @cached_property
     def SINGER(self):
         return Role.objects.get(description=SINGER)
 
-    @property
+    @cached_property
     def PIANIST(self):
         return Role.objects.get(description=PIANIST)
 
-    @property
+    @cached_property
     def KEYBOARDIST(self):
         return Role.objects.get(description=KEYBOARDIST)
 
-    @property
+    @cached_property
     def DRUMMER(self):
         return Role.objects.get(description=DRUMMER)
 
-    @property
+    @cached_property
     def LAGERPHONIST(self):
         return Role.objects.get(description=LAGERPHONIST)
 
-    @property
+    @cached_property
     def LYRICIST(self):
         return Role.objects.get(description=LYRICIST)
 
-    @property
+    @cached_property
     def PUBLICIST(self):
         return Role.objects.get(description=PUBLICIST)
 
-    @property
+    @cached_property
     def STYLIST(self):
         return Role.objects.get(description=STYLIST)
 
-    @property
+    @cached_property
     def KEY_GRIP(self):
         return Role.objects.get(description=KEY_GRIP)
 
-    @property
+    @cached_property
     def MANAGER(self):
         return Role.objects.get(description=MANAGER)
 
-    @property
+    @cached_property
     def CONCEPTUALIST(self):
         return Role.objects.get(description=CONCEPTUALIST)
 
-    @property
+    @cached_property
     def GUITARIST(self):
         return Role.objects.get(description=GUITARIST)
 
-    @property
+    @cached_property
     def SYNTHESIST(self):
         return Role.objects.get(description=SYNTHESIST)

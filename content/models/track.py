@@ -1,8 +1,8 @@
 from django.db import models
+from django.conf import settings
 
 from .soundrecording import SoundRecording
 from .composition import Composition
-from .user import User
 from .contributor import Contributor
 
 TRACK = 'content"."track'
@@ -18,7 +18,7 @@ class Track(models.Model):
     title = models.CharField(max_length=256)
 
     contributors = models.ManyToManyField(Contributor, through="TrackContributor")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6, null=True)
     stream_cost = models.DecimalField(decimal_places=4, max_digits=6, null=True)
     purchase_count = models.BigIntegerField(default=0)

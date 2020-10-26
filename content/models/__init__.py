@@ -6,5 +6,4 @@ from .location import Location
 from .role import Role, Roles
 from .soundrecording import SoundRecording
 from .track import Track, TrackContributor
-from .user import User
 from .composition import Composition, CompositionContributor
