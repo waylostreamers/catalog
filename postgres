@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker exec -it catalog_db_1 psql postgres://admin:password@localhost:5432/catalog

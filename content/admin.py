@@ -14,7 +14,6 @@ from .models import (
     SoundRecording,
     Track,
     TrackContributor,
-    User,
     Composition,
     CompositionContributor,
 )
@@ -33,7 +32,6 @@ models = [
     SoundRecording,
     Track,
     TrackContributor,
-    User,
     Composition,
     CompositionContributor,
 ]

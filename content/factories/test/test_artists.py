@@ -1,5 +1,5 @@
 from django.test import TestCase
-from content.seed.artists import get_initials
+from ..artist import get_initials
 
 
 class InitialsTestCase(TestCase):

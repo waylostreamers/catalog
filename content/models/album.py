@@ -1,8 +1,8 @@
 from django.db import models
+from django.conf import settings
 
 from .track import Track
 from .genre import Genre
-from .user import User
 from .contributor import Contributor
 from .location import Location
 
@@ -27,7 +27,7 @@ class Album(models.Model):
     contributors = models.ManyToManyField(Contributor, through="AlbumContributor")
     tracks = models.ManyToManyField(Track, through="AlbumTrack")
     artwork_id = models.UUIDField(null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     purchase_cost = models.DecimalField(decimal_places=4, max_digits=6, null=True)
     purchase_count = models.BigIntegerField(default=0)
     label_name = models.CharField(max_length=256, null=True)

@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from content.seed import seed
+from content.seed import seed, clear_data
 
 
 class Command(BaseCommand):
@@ -9,8 +9,16 @@ class Command(BaseCommand):
         parser.add_argument(
             "--users", help="The number of users to generate.", type=int
         )
+        parser.add_argument(
+            "--clear",
+            help="Set this flag to delete all model data.",
+            action="store_true",
+        )
 
     def handle(self, *args, **options):
         users = options["users"] or 10
-
-        seed(users=users)
+        clear = options["clear"]
+        if clear:
+            clear_data()
+        else:
+            seed(users)
