@@ -2,7 +2,7 @@ version: '3'
 
 services:
   django:
-    IMAGE: $IMAGE_TAG
+    image: $IMAGE_TAG
     environment:
       DATABASE_URL: postgres://admin:password@db:5432/catalog
       DJANGO_SUPERUSER_USERNAME: admin
