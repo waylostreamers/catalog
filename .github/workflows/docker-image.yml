@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  image_tag: ${{ github.repository }}:${{ github.ref }}:${{ github.sha }}
+
 jobs:
 
   build:
@@ -15,8 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag waylostreams:$(date +%s)
+      run: docker build . --file Dockerfile --tag ${{ env.image_tag }}
     - name: Start docker-compose stack
-      run: docker-compose -f docker-compose.yml up -d
+      run: IMAGE_TAG=${{ env.image_tag }} docker-compose -f ci/docker-compose.yml up -d
     - name: Test
       run: docker exec catalog_django_1 python manage.py test
