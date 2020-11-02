@@ -31,8 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Custom test runner
-TEST_RUNNER = "content.testrunner.PostgresSchemaTestRunner"
+TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 
 # Application definition
