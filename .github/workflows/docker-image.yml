@@ -22,7 +22,7 @@ jobs:
     - name: Run tests
       run: ci/test
       env:
-        IMAGE_TAG=${{ env.image_tag }}
+        IMAGE_TAG: ${{ env.image_tag }}
     - name: Push to docker hub
       run: ci/push
       env:
