@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  image_tag: ${{ github.repository }}:${{ github.ref }}:${{ github.sha }}
+  image_tag: ${{ github.repository }}_${{ github.sha }}
 
 jobs:
 
