@@ -22,4 +22,4 @@ jobs:
     - name: Start docker-compose stack
       run: IMAGE_TAG=${{ env.image_tag }} docker-compose -f ci/docker-compose.yml up -d
     - name: Test
-      run: docker exec catalog_django_1 python manage.py test
+      run: docker exec ci_django_1 python manage.py test
