@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  image_tag: ${{ github.repository }}_${{ github.sha }}
+  image_tag: waylostreams/${{ github.repository }}_${{ github.sha }}
 
 jobs:
 
@@ -21,3 +21,9 @@ jobs:
       run: docker build . --file Dockerfile --tag ${{ env.image_tag }}
     - name: Run tests
       run: IMAGE_TAG=${{ env.image_tag }} docker-compose -f ci/docker-compose.yml run --rm django pytest
+    - name: Push to docker hub
+      run: ci/push
+      env:
+        DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        IMAGE_TAG: ${{ env.image_tag }}
