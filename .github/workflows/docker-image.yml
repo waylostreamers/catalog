@@ -20,7 +20,9 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ env.image_tag }}
     - name: Run tests
-      run: IMAGE_TAG=${{ env.image_tag }} docker-compose -f ci/docker-compose.yml run --rm django pytest
+      run: ci/test
+      env:
+        IMAGE_TAG=${{ env.image_tag }}
     - name: Push to docker hub
       run: ci/push
       env:
