@@ -47,7 +47,7 @@ jobs:
         cluster_cmd: '--cluster'
         cluster: 'waylostreams-prod'
         image_cmd: '--image'
-        image: 'registry.hub.docker.com/'${{ env.image_tag }}
+        image: registry.hub.docker.com/${{ env.image_tag }}
         region_cmd: '--region'
         region: 'us-west-1'
         service_name_cmd: '--service-name'
