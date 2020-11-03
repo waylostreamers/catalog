@@ -29,7 +29,7 @@ SECRET_KEY = "41%q9bmn&mkw=c5rkiogf(+4&gk-e&q-vqq(lw^&_k)rvb=_s@"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
