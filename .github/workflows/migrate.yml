@@ -8,10 +8,8 @@ env:
   image_tag: waylostreams/catalog:bda58324358164f1e2435a98bde51e2a579ed275
 
 jobs:
-
-  deploy:
+  migrate:
     name: 'Deploy updated container image via blue/green deployment to ECS service.'
-    needs: build-test-push
     runs-on: ubuntu-18.04
     steps:
     - name: Migrate
