@@ -13,11 +13,26 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - name: Migrate
-      uses: silinternational/ecs-deploy@master
-      run: /ecs-deploy --cluster 'waylostreams-prod' --task-definition 'waylostreams-migration' --image registry.hub.docker.com/${{ env.image_tag }} --run-task --timeout 60
+      uses: waylostreamers/ecs-deploy@master
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: 'us-west-1'
+      with:
+        aws_access_key_cmd: '--aws-access-key'
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key_cmd: '--aws-secret-key'
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        cluster_cmd: '--cluster'
+        cluster: 'waylostreams-prod'
+        image_cmd: '--image'
+        image: registry.hub.docker.com/${{ env.image_tag }}
+        region_cmd: '--region'
+        region: 'us-west-1'
+        task_definition_cmd: '--task-definition'
+        task_definition: 'waylostreams-migration'
+        run_task: '--run-task'
+        timeout_cmd: '--timeout'
+        timeout: '60'
     - name: Echo success
       run: echo 'migrate completed'
