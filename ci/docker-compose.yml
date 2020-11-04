@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  django:
+    image: $IMAGE_TAG
+    environment:
+      DATABASE_URL: postgres://admin:password@db:5432/catalog
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@example.com
+      DJANGO_SUPERUSER_PASSWORD: password
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: catalog

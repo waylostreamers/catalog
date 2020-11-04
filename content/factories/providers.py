@@ -14,7 +14,7 @@ class TitleProvider(BaseProvider):
 
 
 class RoleProvider(BaseProvider):
-    choices = [roles.PRIMARY, roles.FEATURED]
+    choices = ["PRIMARY", "FEATURED"]
 
     def role(self):
         return faker.random.choice(self.choices)

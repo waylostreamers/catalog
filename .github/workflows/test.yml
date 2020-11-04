@@ -1,0 +1,23 @@
+name: Lint and Test
+
+on:
+  pull_request:
+    branches: [ master ]
+
+env:
+  image_tag: waylostreams/catalog:${{ github.sha }}
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Black Check
+      uses: waylostreamers/action-black@master
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{ env.image_tag }}
+    - name: Run tests
+      run: ci/test
+      env:
+        IMAGE_TAG: ${{ env.image_tag }}
