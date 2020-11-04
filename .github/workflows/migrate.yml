@@ -5,28 +5,9 @@ on:
     branches: [ master ]
 
 env:
-  image_tag: waylostreams/catalog:${{ github.sha }}
+  image_tag: waylostreams/catalog:bda58324358164f1e2435a98bde51e2a579ed275
 
 jobs:
-  build-test-push:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Black Check
-      uses: waylostreamers/action-black@master
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ env.image_tag }}
-    - name: Run tests
-      run: ci/test
-      env:
-        IMAGE_TAG: ${{ env.image_tag }}
-    - name: Push to docker hub
-      run: ci/push
-      env:
-        DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
-        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        IMAGE_TAG: ${{ env.image_tag }}
 
   deploy:
     name: 'Deploy updated container image via blue/green deployment to ECS service.'
@@ -52,7 +33,7 @@ jobs:
         region: 'us-west-1'
         task_definition_cmd: '--task-definition'
         task_definition: 'waylostreams-migration'
-        run_task: '--run-task'
+        run_task: true
         timeout_cmd: '--timeout'
         timeout: '60'
     - name: Echo success
