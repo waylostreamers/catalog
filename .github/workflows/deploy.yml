@@ -28,13 +28,35 @@ jobs:
         DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         IMAGE_TAG: ${{ env.image_tag }}
 
-  deploy:
+  migrate-deploy:
     name: 'Deploy updated container image via blue/green deployment to ECS service.'
     needs: build-test-push
     runs-on: ubuntu-18.04
     steps:
+    - name: Migrate
+      uses: waylostreamers/ecs-deploy@master
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'us-west-1'
+      with:
+        aws_access_key_cmd: '--aws-access-key'
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key_cmd: '--aws-secret-key'
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        cluster_cmd: '--cluster'
+        cluster: 'waylostreams-prod'
+        image_cmd: '--image'
+        image: registry.hub.docker.com/${{ env.image_tag }}
+        region_cmd: '--region'
+        region: 'us-west-1'
+        task_definition_cmd: '--task-definition'
+        task_definition: 'waylostreams-migration'
+        run_task: '--run-task'
+        timeout_cmd: '--timeout'
+        timeout: '60'
     - name: Deploy
-      uses: silinternational/ecs-deploy@master
+      uses: waylostreamers/ecs-deploy@master
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
