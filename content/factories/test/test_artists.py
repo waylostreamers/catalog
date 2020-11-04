@@ -22,6 +22,7 @@ class InitialsTestCase(TestCase):
         with self.assertRaises(ValueError):
             get_initials("sean")
 
+
 class CreateArtist(TestCase):
     def test_create(self):
         artist = ArtistFactory.create()
