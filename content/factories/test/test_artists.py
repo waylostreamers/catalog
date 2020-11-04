@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..artist import get_initials
+from ..artist import get_initials, ArtistFactory
 
 
 class InitialsTestCase(TestCase):
@@ -21,3 +21,9 @@ class InitialsTestCase(TestCase):
         """
         with self.assertRaises(ValueError):
             get_initials("sean")
+
+
+class CreateArtist(TestCase):
+    def test_create(self):
+        artist = ArtistFactory.create()
+        self.assertTrue(artist.name is not None)
