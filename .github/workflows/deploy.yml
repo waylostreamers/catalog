@@ -1,9 +1,7 @@
-name: Docker Image CI
+name: Deploy to production
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 env:
@@ -15,6 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Black Check
+      uses: waylostreamers/action-black@master
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ env.image_tag }}
     - name: Run tests
