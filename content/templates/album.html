@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 {% block content %}
 <h1>Album: {{ object.title }}</h1>
 <p>UPC: {{ object.upc }}</p>
@@ -9,6 +10,11 @@
 
       <tr class="table-row clickable" onclick="document.location = '{% url 'track-detail' track.id %}'">
         <td><a class="basic-link" href="{% url 'track-detail' track.id %}">{{ track.title }}</a></td>
+        <td>
+          <audio onContextMenu="return false;" controls autobuffer onPlay="log_stream1()" controls controlsList="nodownload noremoteplayback">
+            <source src="{{ track.id|presigned_url }}" type="audio/mp3"></source>
+          </audio>
+        </td>
     </tr>
   {% endfor %}
   </tbody>

@@ -6,6 +6,8 @@ volumes:
 services:
   django:
     build: .
+    env_file:
+      - .env
     environment:
       DATABASE_URL: postgres://admin:password@db:5432/catalog
       DJANGO_SUPERUSER_USERNAME: admin
