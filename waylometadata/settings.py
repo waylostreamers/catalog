@@ -15,7 +15,9 @@ import base64
 
 import environ
 
-env = environ.Env()
+env = environ.Env(
+    STORAGE_BACKEND=(str, None)
+)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -123,13 +125,13 @@ STATIC_URL = "/static/"
 MEDIA_PREFIX = "media"
 MEDIA_ROOT = f"{MEDIA_PREFIX}"
 MEDIA_URL = f"/{MEDIA_PREFIX}/"
-if env("STORAGE_BACKEND", None) == "S3":
+if env("STORAGE_BACKEND") == "S3":
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME", None)
+    AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
     AWS_S3_MAX_MEMORY_SIZE = 2500000
-    AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN", None)
-    AWS_CLOUDFRONT_KEY_ID = env("AWS_CLOUDFRONT_KEY_ID", None)
-    AWS_CLOUDFRONT_KEY = base64.b64decode(env("AWS_CLOUDFRONT_KEY", None))
+    AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN")
+    AWS_CLOUDFRONT_KEY_ID = env("AWS_CLOUDFRONT_KEY_ID")
+    AWS_CLOUDFRONT_KEY = base64.b64decode(env("AWS_CLOUDFRONT_KEY"))
 
 # Logging
 
