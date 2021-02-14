@@ -6,7 +6,9 @@ from .models import Artist, Album, Track
 class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = []
+        # fields = []
+        fields = "__all__"
+        exclude = ["artwork_id"]
 
 
 class AlbumForm(forms.ModelForm):
