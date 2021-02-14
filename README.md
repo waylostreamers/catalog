@@ -14,6 +14,8 @@ After installing both of the above:
 git clone https://github.com/waylostreamers/catalog.git
 cd catalog
 
+touch .env (create a black env file ) 
+
 docker-compose up -d
 ./setup.sh
 ```
