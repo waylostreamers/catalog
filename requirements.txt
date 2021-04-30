@@ -22,7 +22,7 @@ pytest-django==3.9.0
 python-dateutil==2.8.1
 pytz==2020.1
 regex==2020.4.4
-rsa==4.6
+rsa==4.7
 six==1.14.0
 sqlparse==0.3.1
 text-unidecode==1.3
